@@ -1,51 +1,49 @@
-Action Controller Tweaks
+Active Record Tweaks
 ===========
 
-ActionController is great, but could be better. Here are some tweaks for it.
+Active Record is great, but could be better. Here are some tweaks for it.
 
 ### Support
 ===========
 Tested against:
-- Action Controller of version `3.2` and `4.0` (`3.1` and below got problem with buggy `rspec-rails`)
-- Ruby `1.9.2`, `1.9.3`, `2.0.0` (except Rails 4 with `1.9.2`)
+- Active Record of version `3.2` and `4.0`
+- Ruby `1.9.3`, `2.0.0` (except Rails 4 with `1.9.2`)
 
-[![Build Status](https://travis-ci.org/PikachuEXE/action_controller_tweaks.png?branch=master)](https://travis-ci.org/PikachuEXE/action_controller_tweaks)
-[![Gem Version](https://badge.fury.io/rb/action_controller_tweaks.png)](http://badge.fury.io/rb/action_controller_tweaks)
-[![Dependency Status](https://gemnasium.com/PikachuEXE/action_controller_tweaks.png)](https://gemnasium.com/PikachuEXE/action_controller_tweaks)
-[![Coverage Status](https://coveralls.io/repos/PikachuEXE/action_controller_tweaks/badge.png)](https://coveralls.io/r/PikachuEXE/action_controller_tweaks)
-[![Code Climate](https://codeclimate.com/github/PikachuEXE/action_controller_tweaks.png)](https://codeclimate.com/github/PikachuEXE/action_controller_tweaks)
+[![Build Status](https://travis-ci.org/PikachuEXE/active_record_tweaks.png?branch=master)](https://travis-ci.org/PikachuEXE/active_record_tweaks)
+[![Gem Version](https://badge.fury.io/rb/active_record_tweaks.png)](http://badge.fury.io/rb/active_record_tweaks)
+[![Dependency Status](https://gemnasium.com/PikachuEXE/active_record_tweaks.png)](https://gemnasium.com/PikachuEXE/active_record_tweaks)
+[![Coverage Status](https://coveralls.io/repos/PikachuEXE/active_record_tweaks/badge.png)](https://coveralls.io/r/PikachuEXE/active_record_tweaks)
+[![Code Climate](https://codeclimate.com/github/PikachuEXE/active_record_tweaks.png)](https://codeclimate.com/github/PikachuEXE/active_record_tweaks)
 
 Install
 =======
 
 ```ruby
-gem 'action_controller_tweaks'
+gem 'active_record_tweaks'
 ```
 
 Usage
 =====
 
-Either include it in specific controller or just `ApplicationController`
+Either include it in specific record or just `ActiveRecord::Base`
 ```ruby
-class SomeController
-  include ActionControllerTweaks
+class SomeRecord
+  include ActiveRecordTweaks
 end 
+
+# or
+
+# In a initialzer
+ActiveRecord::Base.send(:include, ActiveRecordTweaks)
 ```
 
-### `#set_no_cache`
-I got the code from [This Stack Overflow Answer](http://stackoverflow.com/questions/711418/how-to-prevent-browser-page-caching-in-rails)  
-`#expires_now` is not good enough when I test a mobile version page with Chrome on iOS  
+
+### `#cache_key_without_timestamp`
+Nothing special, just like `record.cache_key`  
+But it has no timestamp so you can use it for scoped cache key  
+(e.g. When caching with Cookie, which you want to control the expiry time independent of record update time)  
 Usage:
 ```ruby
-  # Just like using #expires_now
-  set_no_cache
+  # Just like using #cache_key
+  record.cache_key_without_timestamp
 ```
-
-### `#set_session`
-I write this on my own, it's ok to blame me if it's buggy :P  
-This method let's you set session, with expiry time!  
-Example:
-```ruby
-set_session(:key, 'value', expire_in: 1.day)
-```
-Note: Please don't use the session key `session_keys_to_expire`, it's reserved for internal processing
