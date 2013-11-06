@@ -38,31 +38,58 @@ ActiveRecord::Schema.define(:version => 1) do
   create_table :stones do |t|
   end
 
+  create_table :animals do |t|
+    t.datetime :created_at
+    t.datetime :updated_at
+  end
+
   create_table :parents do |t|
     t.datetime :created_at
     t.datetime :updated_at
   end
 
-  create_table :chirdren do |t|
+  create_table :children do |t|
     t.integer :parent_id
 
     t.datetime :created_at
     t.datetime :updated_at
   end
+
+  create_table :people do |t|
+    t.datetime :created_at
+    t.datetime :updated_at
+    t.datetime :created_on
+    t.datetime :updated_on
+  end
 end
 
-# setup models
+# Setup models
 
+# Default cache timestamp format are different for Rails 3 and 4 are different,
+# So set it explictly here
 class Stone < ActiveRecord::Base
 end
 
+class Animal < ActiveRecord::Base
+  self.cache_timestamp_format = :number
+end
+
 class Parent < ActiveRecord::Base
+  self.cache_timestamp_format = :nsec
+
   has_many :children, inverse_of: :parent
 end
 
 class Child < ActiveRecord::Base
+  self.cache_timestamp_format = :nsec
+
   belongs_to :parent, inverse_of: :children, touch: true
 end
+
+class Person < ActiveRecord::Base
+  self.cache_timestamp_format = :nsec
+end
+
 
 RSpec.configure do |config|
 end

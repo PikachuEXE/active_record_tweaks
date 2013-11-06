@@ -47,3 +47,25 @@ Usage:
   # Just like using #cache_key
   record.cache_key_without_timestamp
 ```
+
+
+### `.cache_key`
+There is no class level cache key for ActiveRecord at the moment (4.0.1)  
+Passing an array to `cache_digest` could lead to performance issue and the key can become too long when collection is big  
+([rails#12726](https://github.com/rails/rails/pull/12726))  
+This is used for getting a cache key for a ActiveRecord class for all record (I don't know how to write one for `Relation`, could be similar)  
+You can use it for class level caching (like displaying all Categories or a random list of 5 users  
+And the cache would only expire when there is any record created, updated, or deleted (since `count` and maximum of `updated_at` are used)  
+```ruby
+Person.count # => 1000
+Person.maximum(:updated_at) # => 20131106012125528738000
+Person.cache_key # => "people/all/1000-20131106012125528738000"
+`
+Usage:
+```ruby
+  RecordClass.cache_key
+```
+You can also use it with multiple records (Rails 4 Record might have `updated_at` and `updated_on`)
+```ruby
+  RecordClass.cache_key(:updated_at, :updated_on)
+```
