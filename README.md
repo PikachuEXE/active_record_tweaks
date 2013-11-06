@@ -60,12 +60,12 @@ And the cache would only expire when there is any record created, updated, or de
 Person.count # => 1000
 Person.maximum(:updated_at) # => 20131106012125528738000
 Person.cache_key # => "people/all/1000-20131106012125528738000"
-`
+```
 Usage:
 ```ruby
-  RecordClass.cache_key
+RecordClass.cache_key
 ```
 You can also use it with multiple records (Rails 4 Record might have `updated_at` and `updated_on`)
 ```ruby
-  RecordClass.cache_key(:updated_at, :updated_on)
+RecordClass.cache_key(:updated_at, :updated_on)
 ```
