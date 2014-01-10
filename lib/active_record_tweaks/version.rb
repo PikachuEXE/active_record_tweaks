@@ -1,3 +1,3 @@
 module ActiveRecordTweaks
-  VERSION = '0.1'.freeze
+  VERSION = '0.1.0'
 end
