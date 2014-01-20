@@ -8,9 +8,9 @@ module ActiveRecordTweaks
     # Timestamp is not used to allow custom caching expiration
     # (e.g. Cookie based caching with expiration )
     #
-    #   Product.new.cache_key     # => "products/new"
-    #   Product.find(5).cache_key # => "products/5" (updated_at not available)
-    #   Person.find(5).cache_key  # => "people/5" (updated_at available)
+    #   Product.new.cache_key_without_timestamp     # => "products/new"
+    #   Product.find(5).cache_key_without_timestamp # => "products/5" (updated_at not available)
+    #   Person.find(5).cache_key_without_timestamp  # => "people/5" (updated_at available)
     def cache_key_without_timestamp
       case
       when new_record?
@@ -25,9 +25,9 @@ module ActiveRecordTweaks
       # based on count and maximum value of update timestamp columns
       # (e.g. Cookie based caching with expiration)
       #
-      #   Product.cache_key     # => "products/0" (empty, has updated timestamp columns or not)
-      #   Product.cache_key     # => "products/1" (not empty but has no updated timestamp columns)
-      #   Person.cache_key     # => "people/1-20071224150000" (not empty and has updated timestamp columns)
+      #   Product.cache_key     # => "products/all/0" (empty, has updated timestamp columns or not)
+      #   Product.cache_key     # => "products/all/1" (not empty but has no updated timestamp columns)
+      #   Person.cache_key     # => "people/all/1-20071224150000" (not empty and has updated timestamp columns)
       #
       # @param [Array<String, Symbol>] args The column name with timestamp to check
       def cache_key(*args)

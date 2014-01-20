@@ -60,6 +60,14 @@ And the cache would only expire when there is any record created, updated, or de
 Person.count # => 1000
 Person.maximum(:updated_at) # => 20131106012125528738000
 Person.cache_key # => "people/all/1000-20131106012125528738000"
+
+# When record has multiple updated columns
+Person.maximum(:updated_on) # => 20141106012125528738000
+Person.cache_key(:update_at, :updated_on)     # => "people/all/1000-20141106012125528738000" (not empty but has mutiple updated timestamp columns)
+
+# Other examples
+Product.cache_key     # => "products/all/0" (empty, has updated timestamp columns or not)
+Product.cache_key     # => "products/all/1" (not empty but has no updated timestamp columns)
 ```
 Usage:
 ```ruby
