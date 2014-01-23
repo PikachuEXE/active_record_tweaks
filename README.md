@@ -62,8 +62,13 @@ Person.maximum(:updated_at) # => 20131106012125528738000
 Person.cache_key # => "people/all/1000-20131106012125528738000"
 
 # When record has multiple updated columns
+Person.maximum(:updated_at) # => 20131106012125528738000
 Person.maximum(:updated_on) # => 20141106012125528738000
 Person.cache_key(:update_at, :updated_on)     # => "people/all/1000-20141106012125528738000" (not empty but has mutiple updated timestamp columns)
+
+# Just get cache key without timestamp
+Person.maximum(:updated_on) # => some timestamp
+Person.cache_key(nil)     # => "people/all/1000"
 
 # Other examples
 Product.cache_key     # => "products/all/0" (empty, has updated timestamp columns or not)

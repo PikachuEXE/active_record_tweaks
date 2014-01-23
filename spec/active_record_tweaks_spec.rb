@@ -166,6 +166,37 @@ describe Parent do
             end
           end
         end
+
+        context 'when getting cache_key with nil' do
+          subject { klass.cache_key(nil) }
+
+          context 'and has no record' do
+            before { klass.count.should eq 0 }
+
+            it { should match /\/#{klass.count}$/ }
+          end
+          context 'and has a record' do
+            let!(:person) { klass.create! }
+
+            context 'and it has updated_on value only' do
+              before { person.update_attributes!(updated_at: nil, updated_on: Time.now) }
+
+              it { should eq "people/all/#{klass.count}" }
+            end
+
+            context 'and it has newer updated_at' do
+              before { person.update_attributes!(updated_at: Time.now + 3600, updated_on: Time.now) }
+
+              it { should eq "people/all/#{klass.count}" }
+            end
+
+            context 'and it has newer updated_on' do
+              before { person.update_attributes!(updated_at: Time.now , updated_on: Time.now+ 3600) }
+
+              it { should eq "people/all/#{klass.count}" }
+            end
+          end
+        end
       end
 
       context 'when a class has custom timestamp format' do
