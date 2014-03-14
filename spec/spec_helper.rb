@@ -6,6 +6,8 @@ end
 require 'active_record'
 require 'active_record_tweaks'
 
+require 'timecop'
+
 require 'database_cleaner'
 require 'logger'
 

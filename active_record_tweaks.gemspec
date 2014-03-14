@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "database_cleaner", ">= 1.0"
   s.add_development_dependency "coveralls", ">= 0.7"
   s.add_development_dependency "gem-release", ">= 0.7"
+  s.add_development_dependency "timecop", ">= 0.7.1"
 
   s.required_rubygems_version = ">= 1.4.0"
 end

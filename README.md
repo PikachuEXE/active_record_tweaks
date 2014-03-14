@@ -41,11 +41,24 @@ ActiveRecord::Base.send(:include, ActiveRecordTweaks)
 ### `#cache_key_without_timestamp`
 Nothing special, just like `record.cache_key`  
 But it has no timestamp so you can use it for scoped cache key  
-(e.g. When caching with Cookie, which you want to control the expiry time independent of record update time)  
+e.g. When caching with Cookie, which you want to control the expiry time independent of record update time  
 Usage:
 ```ruby
   # Just like using #cache_key
   record.cache_key_without_timestamp
+```
+
+
+### `#cache_key_from_attributes`
+Nothing special, just like `record.cache_key` in rails 4.1  
+But it does not check against columns  
+e.g. When you have some virtual timestamp attribute method (cached or not)  
+Just make sure you throw some name to it or it will raise error  
+Alias: `#cache_key_from_attribute`
+Usage:
+```ruby
+  # Just like using #cache_key
+  record.cache_key_from_attributes(:happy_at, :chirdren_max_updated_at)
 ```
 
 

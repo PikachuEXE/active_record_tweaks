@@ -20,6 +20,38 @@ module ActiveRecordTweaks
       end
     end
 
+    # Works like #cache_key in rails 4.1, but does not check column
+    # Useful when you have some virtual timestamp attribute method (cached or not)
+    #
+    # @param attribute_names [Array<Symbol,String>]
+    #   Names of attributes method(s)
+    #   It does not have to be column(s)
+    #
+    # @raise [ArgumentError] when attribute_names is empty
+    def cache_key_from_attributes(*attribute_names)
+      attribute_names.any? or raise ArgumentError
+
+      if timestamp = max_updated_attribute_timestamp_for_cache_key(attribute_names)
+        timestamp = timestamp.utc.to_s(cache_timestamp_format)
+        "#{self.class.model_name.cache_key}/#{id}-#{timestamp}"
+      else
+        "#{self.class.model_name.cache_key}/#{id}"
+      end
+    end
+    alias_method :cache_key_from_attribute, :cache_key_from_attributes
+
+    private
+
+    def max_updated_attribute_timestamp_for_cache_key(timestamp_attribute_names)
+      timestamps = timestamp_attribute_names.map do |attribute_name|
+        self.send(attribute_name)
+      end.compact
+
+      if timestamps.present?
+        timestamps.map { |ts| ts.to_time }.max
+      end
+    end
+
     module ClassMethods
       # Returns a cache key for the ActiveRecord class based
       # based on count and maximum value of update timestamp columns
@@ -40,6 +72,8 @@ module ActiveRecordTweaks
           "#{self.model_name.cache_key}/all/#{self.count}"
         end
       end
+
+      private
 
       def max_updated_column_timestamp_for_cache_key(timestamp_columns)
         available_timestamp_columns = timestamp_columns.select { |c| self.column_names.include?(c.to_s) }
