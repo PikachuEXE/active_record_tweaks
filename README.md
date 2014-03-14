@@ -95,3 +95,21 @@ You can also use it with multiple records (Rails 4 Record might have `updated_at
 ```ruby
 RecordClass.cache_key(:updated_at, :updated_on)
 ```
+
+
+### `.cache_key_without_timestamp`
+Just like `.cache_key(nil)`  
+But much clearer
+```ruby
+Person.count # => 1000
+Person.maximum(:updated_at) # => 20131106012125528738000
+Person.cache_key_without_timestamp # => "people/all/1000"
+
+# Other examples
+Product.cache_key     # => "products/all/0" (empty, has updated timestamp columns or not)
+Product.cache_key     # => "products/all/1" (not empty but has no updated timestamp columns)
+```
+Usage:
+```ruby
+RecordClass.cache_key_without_timestamp
+```

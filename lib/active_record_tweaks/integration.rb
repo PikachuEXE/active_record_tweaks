@@ -69,8 +69,20 @@ module ActiveRecordTweaks
           timestamp = timestamp.utc.to_s(cache_timestamp_format)
           "#{self.model_name.cache_key}/all/#{self.count}-#{timestamp}"
         else
-          "#{self.model_name.cache_key}/all/#{self.count}"
+          cache_key_without_timestamp
         end
+      end
+
+      # Returns a cache key for the ActiveRecord class based
+      # based on count only
+      #
+      #   Product.cache_key     # => "products/all/0" (empty, has updated timestamp columns or not)
+      #   Product.cache_key     # => "products/all/1" (not empty but has no updated timestamp columns)
+      #   Person.cache_key     # => "people/all/1" (not empty and has updated timestamp columns)
+      #
+      # @param [Array<String, Symbol>] args The column name with timestamp to check
+      def cache_key_without_timestamp
+        "#{self.model_name.cache_key}/all/#{self.count}"
       end
 
       private
