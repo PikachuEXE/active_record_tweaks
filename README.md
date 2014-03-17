@@ -54,11 +54,11 @@ Nothing special, just like `record.cache_key` in rails 4.1
 But it does not check against columns  
 e.g. When you have some virtual timestamp attribute method (cached or not)  
 Just make sure you throw some name to it or it will raise error  
-Alias: `#cache_key_from_attribute`
+Alias: `#cache_key_from_attribute`  
 Usage:
 ```ruby
   # Just like using #cache_key
-  record.cache_key_from_attributes(:happy_at, :chirdren_max_updated_at)
+  record.cache_key_from_attributes(:happy_at, :children_max_updated_at)
 ```
 
 
@@ -106,8 +106,8 @@ Person.maximum(:updated_at) # => 20131106012125528738000
 Person.cache_key_without_timestamp # => "people/all/1000"
 
 # Other examples
-Product.cache_key     # => "products/all/0" (empty, has updated timestamp columns or not)
-Product.cache_key     # => "products/all/1" (not empty but has no updated timestamp columns)
+Product.cache_key_without_timestamp     # => "products/all/0" (empty, has updated timestamp columns or not)
+Product.cache_key_without_timestamp     # => "products/all/1" (not empty but has no updated timestamp columns)
 ```
 Usage:
 ```ruby
