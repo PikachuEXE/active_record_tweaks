@@ -11,6 +11,9 @@ require 'timecop'
 require 'database_cleaner'
 require 'logger'
 
+require 'rspec'
+require 'rspec/its'
+
 # ActiveRecord::Base.logger = Logger.new(STDOUT) # for easier debugging
 
 RSpec.configure do |config|

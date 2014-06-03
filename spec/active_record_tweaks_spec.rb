@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Parent do
   describe 'included modules' do
-    it do
-      described_class.ancestors.should include(ActiveRecordTweaks)
+    specify do
+      expect(described_class.ancestors).to include(ActiveRecordTweaks)
     end
   end
 
@@ -150,7 +150,7 @@ describe Parent do
         let(:klass) { Stone }
 
         context 'and has no record' do
-          before { klass.count.should eq 0 }
+          before { expect(klass.count).to eq 0 }
 
           it { should match /\/#{klass.count}$/ }
         end
@@ -165,7 +165,7 @@ describe Parent do
         let(:klass) { Parent }
 
         context 'and has no record' do
-          before { klass.count.should eq 0 }
+          before { expect(klass.count).to eq 0 }
 
           it { should match /\/#{klass.count}$/ }
         end
@@ -210,7 +210,7 @@ describe Parent do
           subject { klass.cache_key(:updated_on) }
 
           context 'and has no record' do
-            before { klass.count.should eq 0 }
+          before { expect(klass.count).to eq 0 }
 
             it { should match /\/#{klass.count}$/ }
           end
@@ -235,7 +235,7 @@ describe Parent do
           subject { klass.cache_key(:updated_at, :updated_on) }
 
           context 'and has no record' do
-            before { klass.count.should eq 0 }
+          before { expect(klass.count).to eq 0 }
 
             it { should match /\/#{klass.count}$/ }
           end
@@ -266,7 +266,7 @@ describe Parent do
           subject { klass.cache_key(nil) }
 
           context 'and has no record' do
-            before { klass.count.should eq 0 }
+          before { expect(klass.count).to eq 0 }
 
             it { should match /\/#{klass.count}$/ }
           end
@@ -309,7 +309,7 @@ describe Parent do
         let(:klass) { Stone }
 
         context 'and has no record' do
-          before { klass.count.should eq 0 }
+          before { expect(klass.count).to eq 0 }
 
           it { should match /\/#{klass.count}$/ }
         end
@@ -324,7 +324,7 @@ describe Parent do
         let(:klass) { Parent }
 
         context 'and has no record' do
-          before { klass.count.should eq 0 }
+          before { expect(klass.count).to eq 0 }
 
           it { should match /\/#{klass.count}$/ }
         end
@@ -346,7 +346,7 @@ describe Parent do
         let(:klass) { Person }
 
         context 'and has no record' do
-          before { klass.count.should eq 0 }
+          before { expect(klass.count).to eq 0 }
 
           it { should match /\/#{klass.count}$/ }
         end
