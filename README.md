@@ -5,9 +5,6 @@ Active Record is great, but could be better. Here are some tweaks for it.
 
 ### Support
 ===========
-Tested against:
-- Active Record of version `3.2` and `4.0`
-- Ruby `1.9.3`, `2.0.0` (except Rails 4 with `1.9.2`)
 
 [![Build Status](http://img.shields.io/travis/PikachuEXE/active_record_tweaks.svg)](https://travis-ci.org/PikachuEXE/active_record_tweaks)
 [![Gem Version](http://img.shields.io/gem/v/active_record_tweaks.svg)](http://badge.fury.io/rb/active_record_tweaks)
