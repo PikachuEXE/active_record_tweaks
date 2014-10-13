@@ -6,11 +6,11 @@ Active Record is great, but could be better. Here are some tweaks for it.
 ### Support
 ===========
 
-[![Build Status](http://img.shields.io/travis/PikachuEXE/active_record_tweaks.svg)](https://travis-ci.org/PikachuEXE/active_record_tweaks)
-[![Gem Version](http://img.shields.io/gem/v/active_record_tweaks.svg)](http://badge.fury.io/rb/active_record_tweaks)
-[![Dependency Status](http://img.shields.io/gemnasium/PikachuEXE/active_record_tweaks.svg)](https://gemnasium.com/PikachuEXE/active_record_tweaks)
-[![Coverage Status](http://img.shields.io/coveralls/PikachuEXE/active_record_tweaks.svg)](https://coveralls.io/r/PikachuEXE/active_record_tweaks)
-[![Code Climate](http://img.shields.io/codeclimate/github/PikachuEXE/active_record_tweaks.svg)](https://codeclimate.com/github/PikachuEXE/active_record_tweaks)
+[![Build Status](http://img.shields.io/travis/PikachuEXE/active_record_tweaks.svg?style=flat-square)](https://travis-ci.org/PikachuEXE/active_record_tweaks)
+[![Gem Version](http://img.shields.io/gem/v/active_record_tweaks.svg?style=flat-square)](http://badge.fury.io/rb/active_record_tweaks)
+[![Dependency Status](http://img.shields.io/gemnasium/PikachuEXE/active_record_tweaks.svg?style=flat-square)](https://gemnasium.com/PikachuEXE/active_record_tweaks)
+[![Coverage Status](http://img.shields.io/coveralls/PikachuEXE/active_record_tweaks.svg?style=flat-square)](https://coveralls.io/r/PikachuEXE/active_record_tweaks)
+[![Code Climate](http://img.shields.io/codeclimate/github/PikachuEXE/active_record_tweaks.svg?style=flat-square)](https://codeclimate.com/github/PikachuEXE/active_record_tweaks)
 
 Install
 =======
