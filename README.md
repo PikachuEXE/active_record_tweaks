@@ -3,9 +3,6 @@ Active Record Tweaks
 
 Active Record is great, but could be better. Here are some tweaks for it.
 
-### Support
-===========
-
 [![Build Status](http://img.shields.io/travis/PikachuEXE/active_record_tweaks.svg?style=flat-square)](https://travis-ci.org/PikachuEXE/active_record_tweaks)
 [![Gem Version](http://img.shields.io/gem/v/active_record_tweaks.svg?style=flat-square)](http://badge.fury.io/rb/active_record_tweaks)
 [![Dependency Status](http://img.shields.io/gemnasium/PikachuEXE/active_record_tweaks.svg?style=flat-square)](https://gemnasium.com/PikachuEXE/active_record_tweaks)
