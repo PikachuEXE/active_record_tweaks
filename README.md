@@ -1,7 +1,9 @@
-Active Record Tweaks
-===========
+# Active Record Tweaks
 
 Active Record is great, but could be better. Here are some tweaks for it.
+
+
+## Status
 
 [![Build Status](http://img.shields.io/travis/PikachuEXE/active_record_tweaks.svg?style=flat-square)](https://travis-ci.org/PikachuEXE/active_record_tweaks)
 [![Gem Version](http://img.shields.io/gem/v/active_record_tweaks.svg?style=flat-square)](http://badge.fury.io/rb/active_record_tweaks)
@@ -9,15 +11,15 @@ Active Record is great, but could be better. Here are some tweaks for it.
 [![Coverage Status](http://img.shields.io/coveralls/PikachuEXE/active_record_tweaks.svg?style=flat-square)](https://coveralls.io/r/PikachuEXE/active_record_tweaks)
 [![Code Climate](http://img.shields.io/codeclimate/github/PikachuEXE/active_record_tweaks.svg?style=flat-square)](https://codeclimate.com/github/PikachuEXE/active_record_tweaks)
 
-Install
-=======
+
+## Installation
 
 ```ruby
 gem 'active_record_tweaks'
 ```
 
-Usage
-=====
+
+## Usage
 
 Either include it in specific record or just `ActiveRecord::Base`
 ```ruby
