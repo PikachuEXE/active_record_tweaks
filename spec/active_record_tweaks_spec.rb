@@ -53,22 +53,8 @@ describe Parent do
       let!(:record) { Parent.create! }
 
       before do
-        record.class.class_eval do
-          def virtual_update_at_1
-            1.day.from_now
-          end
-
-          def virtual_update_at_2
-            1.week.from_now
-          end
-        end
-      end
-      after do
-        record.class.class_eval do
-          remove_method :virtual_update_at_1
-
-          remove_method :virtual_update_at_2
-        end
+        allow(record).to receive(:virtual_update_at_1) { 1.day.from_now }
+        allow(record).to receive(:virtual_update_at_2) { 1.week.from_now }
       end
 
       let(:virtual_update_at_1) { record.virtual_update_at_1 }
@@ -86,26 +72,38 @@ describe Parent do
       context "when called with 1 attribute name" do
         let(:arguments) { [:virtual_update_at_1] }
 
-        it do
-          should match %r|
-            #{described_class.model_name.cache_key}
-            \/
-            #{record.id}
-            \-
-            #{virtual_update_at_1_in_cache_key}
-            |x
+        context "when and it's present" do
+          it do
+            should match %r|
+              #{described_class.model_name.cache_key}
+              \/
+              #{record.id}
+              \-
+              #{virtual_update_at_1_in_cache_key}
+              |x
+          end
+        end
+
+        context "when and it's nil" do
+          before do
+            allow(record).to receive(:virtual_update_at_1) { nil }
+          end
+
+          it do
+            should match %r|
+              #{described_class.model_name.cache_key}
+              \/
+              #{record.id}
+              |x
+          end
         end
       end
       context "when called with 2 attribute names" do
         let(:arguments) { [:virtual_update_at_1, :virtual_update_at_2] }
 
-        context "and virtual_update_at_1 < virtual_update_at_2" do
+        context "and #virtual_update_at_1 < #virtual_update_at_2" do
           before do
-            record.class.class_eval do
-              def virtual_update_at_2
-                virtual_update_at_1 + 1.day
-              end
-            end
+            allow(record).to receive(:virtual_update_at_2) { virtual_update_at_1 + 1.day }
           end
 
           it do
@@ -119,13 +117,9 @@ describe Parent do
           end
         end
 
-        context "and virtual_update_at_1 > virtual_update_at_2" do
+        context "and #virtual_update_at_1 > #virtual_update_at_2" do
           before do
-            record.class.class_eval do
-              def virtual_update_at_2
-                virtual_update_at_1 - 1.day
-              end
-            end
+            allow(record).to receive(:virtual_update_at_2) { virtual_update_at_1 - 1.day }
           end
 
           it do
@@ -139,13 +133,9 @@ describe Parent do
           end
         end
 
-        context "and virtual_update_at_1 is nil" do
+        context "and #virtual_update_at_1 is nil" do
           before do
-            record.class.class_eval do
-              def virtual_update_at_1
-                nil
-              end
-            end
+            allow(record).to receive(:virtual_update_at_1) { nil }
           end
 
           it do
@@ -158,13 +148,9 @@ describe Parent do
               |x
           end
         end
-        context "and virtual_update_at_2 is nil" do
+        context "and #virtual_update_at_2 is nil" do
           before do
-            record.class.class_eval do
-              def virtual_update_at_2
-                nil
-              end
-            end
+            allow(record).to receive(:virtual_update_at_2) { nil }
           end
 
           it do
@@ -174,6 +160,20 @@ describe Parent do
               #{record.id}
               \-
               #{virtual_update_at_1_in_cache_key}
+              |x
+          end
+        end
+        context "and both are nil" do
+          before do
+            allow(record).to receive(:virtual_update_at_1) { nil }
+            allow(record).to receive(:virtual_update_at_2) { nil }
+          end
+
+          it do
+            should match %r|
+              #{described_class.model_name.cache_key}
+              \/
+              #{record.id}
               |x
           end
         end
