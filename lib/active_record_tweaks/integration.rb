@@ -1,4 +1,4 @@
-require 'active_support/concern'
+require "active_support/concern"
 
 module ActiveRecordTweaks
   module Integration
@@ -29,9 +29,10 @@ module ActiveRecordTweaks
     #
     # @raise [ArgumentError] when attribute_names is empty
     def cache_key_from_attributes(*attribute_names)
-      attribute_names.any? or raise ArgumentError
+      attribute_names.any? || fail(ArgumentError)
 
-      if timestamp = max_updated_attribute_timestamp_for_cache_key(attribute_names)
+      timestamp = max_updated_attribute_timestamp_for_cache_key(attribute_names)
+      if timestamp
         timestamp = timestamp.utc.to_s(cache_timestamp_format)
         "#{self.class.model_name.cache_key}/#{id}-#{timestamp}"
       else
@@ -44,12 +45,11 @@ module ActiveRecordTweaks
 
     def max_updated_attribute_timestamp_for_cache_key(timestamp_attribute_names)
       timestamps = timestamp_attribute_names.map do |attribute_name|
-        self.send(attribute_name)
+        send(attribute_name)
       end.compact
 
-      if timestamps.present?
-        timestamps.map { |ts| ts.to_time }.max
-      end
+      return nil unless timestamps.present?
+      timestamps.map(&:to_time).max
     end
 
     module ClassMethods
@@ -57,17 +57,20 @@ module ActiveRecordTweaks
       # based on count and maximum value of update timestamp columns
       # (e.g. Cookie based caching with expiration)
       #
-      #   Product.cache_key     # => "products/all/0" (empty, has updated timestamp columns or not)
-      #   Product.cache_key     # => "products/all/1" (not empty but has no updated timestamp columns)
-      #   Person.cache_key     # => "people/all/1-20071224150000" (not empty and has updated timestamp columns)
+      # @example when record class is empty and has updated timestamp columns or not
+      #   Product.cache_key # => "products/all/0"
+      # @example when record class is not empty but has no updated timestamp columns
+      #   Product.cache_key # => "products/all/1"
+      # @example when record class is not empty and has updated timestamp columns
+      #   Person.cache_key # => "people/all/1-20071224150000"
       #
       # @param [Array<String, Symbol>] args The column name with timestamp to check
       def cache_key(*args)
         timestamp_columns = args.empty? ? [:updated_at] : args
 
-        if timestamp = max_updated_column_timestamp_for_cache_key(timestamp_columns)
+        if (timestamp = max_updated_column_timestamp_for_cache_key(timestamp_columns))
           timestamp = timestamp.utc.to_s(cache_timestamp_format)
-          "#{self.model_name.cache_key}/all/#{self.count}-#{timestamp}"
+          "#{model_name.cache_key}/all/#{count}-#{timestamp}"
         else
           cache_key_without_timestamp
         end
@@ -76,23 +79,23 @@ module ActiveRecordTweaks
       # Returns a cache key for the ActiveRecord class based
       # based on count only
       #
-      #   Product.cache_key     # => "products/all/0" (empty, has updated timestamp columns or not)
-      #   Product.cache_key     # => "products/all/1" (not empty but has no updated timestamp columns)
-      #   Person.cache_key     # => "people/all/1" (not empty and has updated timestamp columns)
+      #   Product.cache_key # => "products/all/0" (empty, has updated timestamp columns or not)
+      #   Product.cache_key # => "products/all/1" (not empty but has no updated timestamp columns)
+      #   Person.cache_key  # => "people/all/1" (not empty and has updated timestamp columns)
       #
       # @param [Array<String, Symbol>] args The column name with timestamp to check
       def cache_key_without_timestamp
-        "#{self.model_name.cache_key}/all/#{self.count}"
+        "#{model_name.cache_key}/all/#{count}"
       end
 
       private
 
       def max_updated_column_timestamp_for_cache_key(timestamp_columns)
-        available_timestamp_columns = timestamp_columns.select { |c| self.column_names.include?(c.to_s) }
+        available_timestamp_columns = timestamp_columns.select { |c| column_names.include?(c.to_s) }
+        timestamps = available_timestamp_columns.map { |column| maximum(column) }.compact
 
-        if (timestamps = available_timestamp_columns.map { |column| self.maximum(column) }.compact).present?
-          timestamps.map { |ts| ts.to_time }.max
-        end
+        return nil unless timestamps.present?
+        timestamps.map(&:to_time).max
       end
     end
   end

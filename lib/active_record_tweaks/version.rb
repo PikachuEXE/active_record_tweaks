@@ -1,5 +1,5 @@
 module ActiveRecordTweaks
-  VERSION = '0.2.0'
+  VERSION = "0.2.0".freeze
 
   def self.version
     Gem::Version.new(VERSION)

@@ -1,18 +1,18 @@
 if ENV["TRAVIS"]
-  require 'coveralls'
-  Coveralls.wear!('rails')
+  require "coveralls"
+  Coveralls.wear!("rails")
 end
 
-require 'active_record'
-require 'active_record_tweaks'
+require "active_record"
+require "active_record_tweaks"
 
-require 'timecop'
+require "timecop"
 
-require 'database_cleaner'
-require 'logger'
+require "database_cleaner"
+require "logger"
 
-require 'rspec'
-require 'rspec/its'
+require "rspec"
+require "rspec/its"
 
 # ActiveRecord::Base.logger = Logger.new(STDOUT) # for easier debugging
 
@@ -34,14 +34,13 @@ ActiveRecord::Base.send(:include, ActiveRecordTweaks)
 
 # connect
 ActiveRecord::Base.establish_connection(
-  :adapter => "sqlite3",
-  :database => ":memory:"
+  adapter:  "sqlite3",
+  database: ":memory:",
 )
 
 # create tables
-ActiveRecord::Schema.define(:version => 1) do
-  create_table :stones do |t|
-  end
+ActiveRecord::Schema.define(version: 1) do
+  create_table :stones
 
   create_table :animals do |t|
     t.datetime :created_at
@@ -93,8 +92,4 @@ end
 
 class Person < ActiveRecord::Base
   self.cache_timestamp_format = :nsec
-end
-
-
-RSpec.configure do |config|
 end
