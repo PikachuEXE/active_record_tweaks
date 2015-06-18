@@ -5,3 +5,4 @@ coverage/.resultset.json
 # Ignore Appraisal related files
 gemfiles/*.gemfile.lock
 pkg/*
+.idea/
