@@ -73,6 +73,7 @@ Thus deprecated without replacement.
 Rails 5 already have `#cache_key` in relation class: https://github.com/rails/rails/pull/20884  
 There is also a gem for older rails: https://github.com/customink/activerecord-collection_cache_key  
 
+**Usage**  
 There is no class level cache key for ActiveRecord at the moment (4.0.1)  
 Passing an array to `cache_digest` could lead to performance issue and the key can become too long when collection is big  
 ([rails#12726](https://github.com/rails/rails/pull/12726))  
@@ -110,8 +111,9 @@ RecordClass.cache_key(:updated_at, :updated_on)
 ### `.cache_key_without_timestamp`
 
 **DEPRECATED**  
-Same as `.cache_key`  
+Same deprecation reasons and replacement suggestion as `.cache_key` above  
 
+**Usage**
 Just like `.cache_key(nil)`  
 But much clearer
 ```ruby
