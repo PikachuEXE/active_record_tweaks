@@ -1,8 +1,10 @@
-require "active_support/concern"
-
 module ActiveRecordTweaks
   module Integration
-    extend ActiveSupport::Concern
+    def self.included(base)
+      base.class_eval do
+        extend ClassMethods
+      end
+    end
 
     # Returns a cache key that can be used to identify this record.
     # Timestamp is not used to allow custom caching expiration

@@ -1,12 +1,10 @@
-require "active_support/concern"
-
 require "active_record_tweaks/version"
 require "active_record_tweaks/integration"
 
 module ActiveRecordTweaks
-  extend ActiveSupport::Concern
-
-  included do
-    include Integration
+  def self.included(base)
+    base.class_eval do
+      include Integration
+    end
   end
 end
