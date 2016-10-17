@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+# rubocop:disable all
 $LOAD_PATH.push File.expand_path("../lib", __FILE__)
 
 author_name = "PikachuEXE"

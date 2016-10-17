@@ -12,8 +12,7 @@ module ActiveRecordTweaks
     #   Product.find(5).cache_key_without_timestamp # => "products/5" (updated_at not available)
     #   Person.find(5).cache_key_without_timestamp  # => "people/5" (updated_at available)
     def cache_key_without_timestamp
-      case
-      when new_record?
+      if new_record?
         "#{self.class.model_name.cache_key}/new"
       else
         "#{self.class.model_name.cache_key}/#{id}"
@@ -39,7 +38,7 @@ module ActiveRecordTweaks
         "#{self.class.model_name.cache_key}/#{id}"
       end
     end
-    alias_method :cache_key_from_attribute, :cache_key_from_attributes
+    alias cache_key_from_attribute cache_key_from_attributes
 
     private
 
