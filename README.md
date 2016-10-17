@@ -24,12 +24,19 @@ gem 'active_record_tweaks'
 Either include it in specific record or just `ActiveRecord::Base`
 ```ruby
 class SomeRecord
+  include ActiveRecordTweaks::Integration::InstanceMethods
+  # This module is also DEPRECATED
+  # See below for details
+  extend  ActiveRecordTweaks::Integration::ClassMethods
+
+  # DEPRECATED
   include ActiveRecordTweaks
 end 
 
 # or
 
 # In a initialzer
+# DEPRECATED
 ActiveRecord::Base.send(:include, ActiveRecordTweaks)
 ```
 
@@ -59,6 +66,13 @@ Usage:
 
 
 ### `.cache_key`
+
+**DEPRECATED**  
+This method does NOT consider the query like filters and and sort orders.  
+Thus deprecated without replacement.  
+Rails 5 already have `#cache_key` in relation class: https://github.com/rails/rails/pull/20884  
+There is also a gem for older rails: https://github.com/customink/activerecord-collection_cache_key  
+
 There is no class level cache key for ActiveRecord at the moment (4.0.1)  
 Passing an array to `cache_digest` could lead to performance issue and the key can become too long when collection is big  
 ([rails#12726](https://github.com/rails/rails/pull/12726))  
@@ -94,6 +108,10 @@ RecordClass.cache_key(:updated_at, :updated_on)
 
 
 ### `.cache_key_without_timestamp`
+
+**DEPRECATED**  
+Same as `.cache_key`  
+
 Just like `.cache_key(nil)`  
 But much clearer
 ```ruby
