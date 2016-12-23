@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency "activerecord", ">= 3.2.0", "< 5.0.0"
+  s.add_dependency "activerecord", ">= 4.0.0", "< 5.1.0"
 
   s.add_development_dependency "bundler", ">= 1.0.0"
   s.add_development_dependency "rake", "~> 10.0"
@@ -40,6 +40,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "gem-release", ">= 0.7"
   s.add_development_dependency "timecop", ">= 0.7.1"
   s.add_development_dependency "rubocop", "~> 0.30"
+
+  s.required_ruby_version = ">= 2.1.0"
 
   s.required_rubygems_version = ">= 1.4.0"
 end

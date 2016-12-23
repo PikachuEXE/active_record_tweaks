@@ -6,13 +6,10 @@ cache:
 - bundler
 rvm:
   - 2.1.10
-  - 2.2.5
-  # Since the Travis Build Env does not recognize `2.3` alias yet
-  # We need to specify the version precisely
-  - 2.3.1
+  - 2.2.6
+  - 2.3.3
   - ruby-head
 gemfile:
-  - gemfiles/rails_3_2.gemfile
   - gemfiles/rails_4_0.gemfile
   - gemfiles/rails_4_1.gemfile
   - gemfiles/rails_4_2.gemfile
@@ -20,4 +17,9 @@ matrix:
   fast_finish: true
   allow_failures:
     - rvm: ruby-head
+  include:
+  - rvm: 2.3.3
+    gemfile: gemfiles/rails_5_0.gemfile
+  - rvm: ruby-head
+    gemfile: gemfiles/rails_5_0.gemfile
 
