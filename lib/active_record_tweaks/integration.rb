@@ -61,9 +61,15 @@ module ActiveRecordTweaks
     end
 
     module ClassMethods
-      # rubocop:disable all
-      warn "[DEPRECATION] `ActiveRecordTweaks::Integration::ClassMethods` is deprecated without replacement. Please read README in project for details."
-      # rubocop:enable all
+      def self.extended(_base)
+        # rubocop:disable all
+        warn ([
+          "[DEPRECATION]",
+          "`ActiveRecordTweaks::Integration::ClassMethods` is deprecated without replacement.",
+          "Please read README in project for details."
+        ].join(" "))
+        # rubocop:enable all
+      end
 
       # Returns a cache key for the ActiveRecord class based
       # based on count and maximum value of update timestamp columns
