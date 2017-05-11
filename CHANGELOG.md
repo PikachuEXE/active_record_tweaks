@@ -11,13 +11,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- Add support for AR 5.1.x
-- Drop support for AR 4.0.x
-- Drop support for Ruby < 2.2
+- Nothing
 
 ### Fixed
 
 - Nothing
+
+
+## [0.2.3] - 2017-05-11
+
+### Changed
+
+- Add support for AR 5.1.x
+- Drop support for AR 4.0.x
+- Drop support for Ruby < 2.2
 
 
 ## [0.2.2] - 2016-12-23
@@ -53,7 +60,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Initial Release
   
   
-[Unreleased]: https://github.com/AssetSync/asset_sync/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/AssetSync/asset_sync/compare/v0.2.3...HEAD
+[0.2.3]: https://github.com/AssetSync/asset_sync/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/AssetSync/asset_sync/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/AssetSync/asset_sync/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/AssetSync/asset_sync/compare/v0.1...v0.2.0
