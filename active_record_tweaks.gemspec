@@ -39,7 +39,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "coveralls", ">= 0.7"
   s.add_development_dependency "gem-release", ">= 0.7"
   s.add_development_dependency "timecop", ">= 0.7.1"
-  s.add_development_dependency "rubocop", "~> 0.30"
 
   s.required_ruby_version = ">= 2.2.0"
 
