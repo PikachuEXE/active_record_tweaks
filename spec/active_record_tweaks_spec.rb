@@ -258,13 +258,13 @@ describe Parent do
             let!(:person) { klass.create! }
 
             context "and it has updated_at value only" do
-              before { person.update_attributes!(updated_at: Time.now, updated_on: nil) }
+              before { person.update!(updated_at: Time.now, updated_on: nil) }
 
               it { should eq "people/all/#{klass.count}" }
             end
 
             context "and it has updated_on value only" do
-              before { person.update_attributes!(updated_at: nil, updated_on: Time.now) }
+              before { person.update!(updated_at: nil, updated_on: Time.now) }
 
               it do
                 should eq "people/all/"\
@@ -287,7 +287,7 @@ describe Parent do
 
             context "and it has updated_on value only" do
               before do
-                person.update_attributes!(
+                person.update!(
                   updated_at: nil,
                   updated_on: Time.now,
                 )
@@ -301,7 +301,7 @@ describe Parent do
 
             context "and it has newer updated_at" do
               before do
-                person.update_attributes!(
+                person.update!(
                   updated_at: Time.now + 3600,
                   updated_on: Time.now,
                 )
@@ -315,7 +315,7 @@ describe Parent do
 
             context "and it has newer updated_on" do
               before do
-                person.update_attributes!(
+                person.update!(
                   updated_at: Time.now,
                   updated_on: Time.now + 3600,
                 )
@@ -342,7 +342,7 @@ describe Parent do
 
             context "and it has updated_on value only" do
               before do
-                person.update_attributes!(
+                person.update!(
                   updated_at: nil,
                   updated_on: Time.now,
                 )
@@ -353,7 +353,7 @@ describe Parent do
 
             context "and it has newer updated_at" do
               before do
-                person.update_attributes!(
+                person.update!(
                   updated_at: Time.now + 3600,
                   updated_on: Time.now,
                 )
@@ -364,7 +364,7 @@ describe Parent do
 
             context "and it has newer updated_on" do
               before do
-                person.update_attributes!(
+                person.update!(
                   updated_at: Time.now,
                   updated_on: Time.now + 3600,
                 )
@@ -439,13 +439,13 @@ describe Parent do
           let!(:person) { klass.create! }
 
           context "and it has updated_at value only" do
-            before { person.update_attributes!(updated_at: Time.now, updated_on: nil) }
+            before { person.update!(updated_at: Time.now, updated_on: nil) }
 
             it { should eq "people/all/#{klass.count}" }
           end
 
           context "and it has updated_on value only" do
-            before { person.update_attributes!(updated_at: nil, updated_on: Time.now) }
+            before { person.update!(updated_at: nil, updated_on: Time.now) }
 
             it { should eq "people/all/#{klass.count}" }
           end
