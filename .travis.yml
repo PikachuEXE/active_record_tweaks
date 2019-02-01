@@ -3,7 +3,7 @@
 sudo: false
 language: ruby
 cache:
-- bundler
+  - bundler
 rvm:
   - 2.3
   - 2.4
@@ -15,7 +15,13 @@ gemfile:
   - gemfiles/rails_5_0.gemfile
   - gemfiles/rails_5_1.gemfile
   - gemfiles/rails_5_2.gemfile
+  - gemfiles/rails_6_0.gemfile
 matrix:
   fast_finish: true
+  exclude:
+    - rvm: 2.3
+      gemfile: gemfiles/rails_6_0.gemfile
+    - rvm: 2.4
+      gemfile: gemfiles/rails_6_0.gemfile
   allow_failures:
     - rvm: ruby-head
