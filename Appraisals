@@ -5,6 +5,7 @@ appraise "rails_4_2" do
   gem "actionpack", version
   gem "activerecord", version
   gem "railties", version
+  gem "sqlite3", "~> 1.3.6"
 end
 
 appraise "rails_5_0" do
@@ -13,6 +14,7 @@ appraise "rails_5_0" do
   gem "actionpack", version
   gem "activerecord", version
   gem "railties", version
+  gem "sqlite3", "~> 1.3.6"
 end
 
 appraise "rails_5_1" do
