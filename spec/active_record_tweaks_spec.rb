@@ -23,7 +23,7 @@ describe Parent do
         let(:record) { Parent.create! }
 
         context "and update_at is nil" do
-          before { record.update_attributes!(updated_at: nil) }
+          before { record.update!(updated_at: nil) }
 
           it "works like #cache_key" do
             should eq "#{record.class.model_name.cache_key}/#{record.id}"
