@@ -40,8 +40,14 @@ module ActiveRecordTweaks
 
         timestamp = max_updated_attribute_timestamp_for_cache_key(attribute_names)
         if timestamp
-          timestamp = timestamp.utc.to_s(cache_timestamp_format)
-          "#{self.class.model_name.cache_key}/#{id}-#{timestamp}"
+          timestamp_str = timestamp.utc.yield_self do |utc_time|
+            if utc_time.respond_to?(:to_fs)
+              utc_time.to_fs(cache_timestamp_format)
+            else
+              utc_time.to_s(cache_timestamp_format)
+            end
+          end
+          "#{self.class.model_name.cache_key}/#{id}-#{timestamp_str}"
         else
           "#{self.class.model_name.cache_key}/#{id}"
         end
@@ -87,8 +93,14 @@ module ActiveRecordTweaks
         timestamp_columns = args.empty? ? [:updated_at] : args
 
         if (timestamp = max_updated_column_timestamp_for_cache_key(timestamp_columns))
-          timestamp = timestamp.utc.to_s(cache_timestamp_format)
-          "#{model_name.cache_key}/all/#{count}-#{timestamp}"
+          timestamp_str = timestamp.utc.yield_self do |utc_time|
+            if utc_time.respond_to?(:to_fs)
+              utc_time.to_fs(cache_timestamp_format)
+            else
+              utc_time.to_s(cache_timestamp_format)
+            end
+          end
+          "#{model_name.cache_key}/all/#{count}-#{timestamp_str}"
         else
           cache_key_without_timestamp
         end

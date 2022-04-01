@@ -58,9 +58,26 @@ describe Parent do
       end
 
       let(:virtual_update_at_1) { record.virtual_update_at_1 }
-      let(:virtual_update_at_1_in_cache_key) { virtual_update_at_1.utc.to_s(:nsec) }
+      let(:virtual_update_at_1_in_cache_key) do
+
+        virtual_update_at_1.utc.yield_self do |utc_time|
+          if utc_time.respond_to?(:to_fs)
+            utc_time.to_fs(:nsec)
+          else
+            utc_time.to_s(:nsec)
+          end
+        end
+      end
       let(:virtual_update_at_2) { record.virtual_update_at_2 }
-      let(:virtual_update_at_2_in_cache_key) { virtual_update_at_2.utc.to_s(:nsec) }
+      let(:virtual_update_at_2_in_cache_key) do
+        virtual_update_at_2.utc.yield_self do |utc_time|
+          if utc_time.respond_to?(:to_fs)
+            utc_time.to_fs(:nsec)
+          else
+            utc_time.to_s(:nsec)
+          end
+        end
+      end
 
       subject { record.cache_key_from_attribute(*arguments) }
 
@@ -211,8 +228,16 @@ describe Parent do
           let!(:parent) { klass.create! }
 
           it do
+            expected_time_str = klass.maximum(:updated_at).utc.yield_self do |utc_time|
+              if utc_time.respond_to?(:to_fs)
+                utc_time.to_fs(:nsec)
+              else
+                utc_time.to_s(:nsec)
+              end
+            end
+
             should eq "parents/all/"\
-              "#{klass.count}-#{klass.maximum(:updated_at).utc.to_s(:nsec)}"
+              "#{klass.count}-#{expected_time_str}"
           end
 
           context "when record all has nil updated timestamps" do
