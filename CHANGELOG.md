@@ -18,6 +18,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Nothing
 
 
+## [0.2.5] - 2022-04-12
+
+### Changed
+
+- Add support for AR 7.x
+- Drop support for Ruby < 2.7
+
+
 ## [0.2.4] - 2019-08-26
 
 ### Changed
@@ -66,9 +74,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Initial Release
-  
-  
-[Unreleased]: https://github.com/PikachuEXE/active_record_tweaks/compare/v0.2.4...HEAD
+
+
+[Unreleased]: https://github.com/PikachuEXE/active_record_tweaks/compare/v0.2.5...HEAD
+[0.2.5]: https://github.com/PikachuEXE/active_record_tweaks/compare/v0.2.4...v0.2.5
 [0.2.4]: https://github.com/PikachuEXE/active_record_tweaks/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/PikachuEXE/active_record_tweaks/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/PikachuEXE/active_record_tweaks/compare/v0.2.1...v0.2.2
