@@ -5,7 +5,7 @@ Active Record is great, but could be better. Here are some tweaks for it.
 
 ## Status
 
-[![GitHub Build Status](https://img.shields.io/github/workflow/status/PikachuEXE/active_record_tweaks/Tests?style=flat-square)](https://github.com/PikachuEXE/active_record_tweaks/actions?query=workflow%3ATests)
+[![GitHub Build Status](https://img.shields.io/github/actions/workflow/status/PikachuEXE/active_record_tweaks/tests.yaml?branch=master&style=flat-square)](https://github.com/PikachuEXE/active_record_tweaks/actions?query=workflow%3ATests)
 
 [![Gem Version](http://img.shields.io/gem/v/active_record_tweaks.svg?style=flat-square)](http://badge.fury.io/rb/active_record_tweaks)
 [![License](https://img.shields.io/github/license/PikachuEXE/active_record_tweaks.svg?style=flat-square)](http://badge.fury.io/rb/active_record_tweaks)
