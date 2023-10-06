@@ -292,8 +292,16 @@ describe Parent do
               before { person.update!(updated_at: nil, updated_on: Time.now) }
 
               it do
+                expected_time_str = klass.maximum(:updated_on).utc.yield_self do |utc_time|
+                  if utc_time.respond_to?(:to_fs)
+                    utc_time.to_fs(:nsec)
+                  else
+                    utc_time.to_s(:nsec)
+                  end
+                end
+
                 should eq "people/all/"\
-                  "#{klass.count}-#{klass.maximum(:updated_on).utc.to_s(:nsec)}"
+                  "#{klass.count}-#{expected_time_str}"
               end
             end
           end
@@ -319,8 +327,16 @@ describe Parent do
               end
 
               it do
+                expected_time_str = klass.maximum(:updated_on).utc.yield_self do |utc_time|
+                  if utc_time.respond_to?(:to_fs)
+                    utc_time.to_fs(:nsec)
+                  else
+                    utc_time.to_s(:nsec)
+                  end
+                end
+
                 should eq "people/all/"\
-                  "#{klass.count}-#{klass.maximum(:updated_on).utc.to_s(:nsec)}"
+                  "#{klass.count}-#{expected_time_str}"
               end
             end
 
@@ -333,8 +349,16 @@ describe Parent do
               end
 
               it do
+                expected_time_str = klass.maximum(:updated_at).utc.yield_self do |utc_time|
+                  if utc_time.respond_to?(:to_fs)
+                    utc_time.to_fs(:nsec)
+                  else
+                    utc_time.to_s(:nsec)
+                  end
+                end
+
                 should eq "people/all/"\
-                  "#{klass.count}-#{klass.maximum(:updated_at).utc.to_s(:nsec)}"
+                  "#{klass.count}-#{expected_time_str}"
               end
             end
 
@@ -347,8 +371,16 @@ describe Parent do
               end
 
               it do
+                expected_time_str = klass.maximum(:updated_on).utc.yield_self do |utc_time|
+                  if utc_time.respond_to?(:to_fs)
+                    utc_time.to_fs(:nsec)
+                  else
+                    utc_time.to_s(:nsec)
+                  end
+                end
+
                 should eq "people/all/"\
-                  "#{klass.count}-#{klass.maximum(:updated_on).utc.to_s(:nsec)}"
+                  "#{klass.count}-#{expected_time_str}"
               end
             end
           end
@@ -406,8 +438,16 @@ describe Parent do
         let!(:record) { klass.create! }
 
         it do
+          expected_time_str = klass.maximum(:updated_at).utc.yield_self do |utc_time|
+            if utc_time.respond_to?(:to_fs)
+              utc_time.to_fs(:number)
+            else
+              utc_time.to_s(:number)
+            end
+          end
+
           should eq "animals/all/"\
-            "#{klass.count}-#{klass.maximum(:updated_at).utc.to_s(:number)}"
+            "#{klass.count}-#{expected_time_str}"
         end
       end
     end

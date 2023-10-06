@@ -22,3 +22,11 @@ appraise "rails_7_0" do
   gem "activerecord", version
   gem "railties", version
 end
+
+appraise "rails_7_1" do
+  version = "~> 7.1.0"
+  gem "activesupport", version
+  gem "actionpack", version
+  gem "activerecord", version
+  gem "railties", version
+end
