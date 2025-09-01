@@ -6,6 +6,10 @@ appraise "rails_7_0" do
   gem "activerecord", version
   gem "railties", version
   gem "sqlite3", "~> 1.3"
+
+  gem "bigdecimal"
+  gem "mutex_m"
+  gem "logger"
 end
 
 appraise "rails_7_1" do
